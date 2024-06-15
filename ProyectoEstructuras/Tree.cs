@@ -18,14 +18,14 @@ public class Node
 
 public class Tree
 {
-    public Node Root { get; private set; }
+    public Node Root { get; set; }
 
     public void Add(int data)
     {
         Root = AddRecursive(Root, data);
     }
 
-    private Node AddRecursive(Node node, int data)
+    public Node AddRecursive(Node node, int data)
     {
         if (node == null)
             return new Node(data);
@@ -45,7 +45,7 @@ public class Tree
         Console.WriteLine();
     }
 
-    private void InorderPrint(Node node)
+    public void InorderPrint(Node node)
     {
         if (node != null)
         {
@@ -62,7 +62,7 @@ public class Tree
         return FindRecursive(Root, value);
     }
 
-    private bool FindRecursive(Node node, int value)
+    public bool FindRecursive(Node node, int value)
     {
         if (node == null)
             return false;
@@ -81,18 +81,18 @@ public class Tree
     public Tree Union(Tree other)
     {
         Tree result = new Tree();
-        AddTreeInorder(Root, result);
-        other.AddTreeInorder(other.Root, result);
+        AddTree(Root, result);
+        other.AddTree(other.Root, result);
         return result;
     }
 
-    private void AddTreeInorder(Node node, Tree result)
+    public void AddTree(Node node, Tree result)
     {
         if (node != null)
         {
-            AddTreeInorder(node.Left, result);
+            AddTree(node.Left, result);
             result.Add(node.Data);
-            AddTreeInorder(node.Right, result);
+            AddTree(node.Right, result);
         }
     }
     #endregion
@@ -106,7 +106,7 @@ public class Tree
         return result;
     }
   
-    private Tree IntersectionAux(Node node, Tree other, Tree result)
+    public Tree IntersectionAux(Node node, Tree other, Tree result)
     {
         if (node != null)
         {
@@ -131,22 +131,18 @@ public class Tree
         result = DifferenceAux(Root, other, result);
         return result;
     }
-    private Tree DifferenceAux(Node node, Tree other, Tree result)
+    public Tree DifferenceAux(Node node, Tree other, Tree result)
     {
-        if(node == null)
+        if (node != null)
         {
-            return result;
-        }
-        else
-        {
-            if(!other.Find(node.Data))
+            if (!other.Find(node.Data))
             {
                 result.Add(node.Data);
             }
-            DifferenceAux(node.Right, other, result);   
+            DifferenceAux(node.Right, other, result);
             DifferenceAux(node.Left, other, result);
-            return result;
         }
+        return result;
     }
     #endregion
 }

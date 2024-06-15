@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-/*
+﻿/*
  
  1. Bubble Sort 
 2. Selection Sort 
@@ -20,8 +14,9 @@ namespace ProyectoEstructuras
     public class SortingMethods
     {
         #region Bubble Sort
-        public void BubbleSort(int[] arr, int n)
+        public void BubbleSort(int[] arr)
         {
+            int n = arr.Length;
             int i, j, temp;
             bool swapped;
             for (i = 0; i < n - 1; i++)
@@ -303,5 +298,42 @@ namespace ProyectoEstructuras
         }
         #endregion
 
+
+        public int[] SortArray(int[] array, int leftIndex, int rightIndex)
+        {
+            var i = leftIndex;
+            var j = rightIndex;
+            var pivot = array[leftIndex];
+
+            while (i <= j)
+            {
+                while (array[i] < pivot)
+                {
+                    i++;
+                }
+
+                while (array[j] > pivot)
+                {
+                    j--;
+                }
+
+                if (i <= j)
+                {
+                    int temp = array[i];
+                    array[i] = array[j];
+                    array[j] = temp;
+                    i++;
+                    j--;
+                }
+            }
+
+            if (leftIndex < j)
+                SortArray(array, leftIndex, j);
+
+            if (i < rightIndex)
+                SortArray(array, i, rightIndex);
+
+            return array;
+        }
     }
 }

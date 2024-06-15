@@ -11,6 +11,11 @@ namespace ProyectoEstructuras
 {
     public class Vectores // 100000
     {
+        public void ListToJson(List<int> list, string fileName)
+        {
+            string jsonString = JsonSerializer.Serialize(list);
+            File.WriteAllText(fileName, jsonString);
+        }
 
         public void PrintList(List<int> list)
         {
@@ -27,7 +32,7 @@ namespace ProyectoEstructuras
             }
         }
 
-        public List<int> GenerateSortedList(int size, int minValue, int maxValue)
+        public List<int> GenerateSortedList(int size)
         {
             Random random = new Random();
             List<int> list = new List<int>(size);
@@ -74,22 +79,36 @@ namespace ProyectoEstructuras
             return SemiSortedList;
         }
 
-        public int[] ReadArray(string fileName)
+        public List<int>  GenerateRepeated (int size)
+        {
+            Random random = new Random();
+            int portion = size / 10;            
+
+            List<int> listRepeated = new List<int>();
+
+            for (int i = 1; i <= size; i++)
+            {
+                int randomNumber = random.Next(1, portion + 1);
+
+                listRepeated.Add(randomNumber);
+            }
+
+            return listRepeated;
+        }
+        public int[] ReadJson(string fileName)
         {
           
             string jsonString = File.ReadAllText(fileName);           
             int[] ArrayRandom = JsonSerializer.Deserialize<int[]>(jsonString);
-            //this.PrintList(VectorRandom);
             return ArrayRandom;
 
         }
 
-        public List<int> ReadArrayToList(string fileName)
+        public List<int> ReadJsonToList(string fileName)
         {
 
             string jsonString = File.ReadAllText(fileName);
             List<int> ArrayRandom = JsonSerializer.Deserialize<List<int>>(jsonString);
-            //this.PrintList(VectorRandom);
             return ArrayRandom;
 
         }

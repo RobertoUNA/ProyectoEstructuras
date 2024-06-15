@@ -33,46 +33,55 @@ Console.WriteLine("Union tree "); unionTree.Print();
 
 // Intersection of tree1 and tree2
 Tree intersectionTree = tree1.Intersection(tree2); 
-Console.WriteLine("Intersection  tree"); intersectionTree.Print();
+Console.WriteLine("Intersection tree"); intersectionTree.Print();
 
 // Difference of tree1 and tree2
 Tree differenceTree = tree1.Difference(tree2); 
-Console.WriteLine("Difference  tree"); differenceTree.Print();
+Console.WriteLine("Difference tree"); differenceTree.Print();
 #endregion
 */
 
 /*
- 
- 1. Bubble Sort 
+1. Bubble Sort 
 2. Selection Sort 
 3. Insertion Sort 
 4. Merge Sort 
 5. Quick Sort 
 6. Heap Sort 
-7. Counting Sort 
- 
+7. Counting Sort  
  */
-List<int> l = new List<int>();
+
 
 Vectores vectGen= new Vectores();
-//l = vectGen.GenerateRepeated(100000, 1, 100000);
-//Console.WriteLine("It has "+l.Count);
-//string fileName = "ArrayRepeated.json";
-//string jsonString = JsonSerializer.Serialize(l);
-//File.WriteAllText(fileName, jsonString);
-
 SortingMethods sortingMethods = new SortingMethods();
-int[] array = vectGen.ReadArray("ArrayInverse.json");
+
+//10000
+List<int> list = vectGen.GenerateSortedList(10700);
+list.Reverse();
+vectGen.ListToJson(list, "Sorted2.json");
+
+
+int[] array = vectGen.ReadJson("Sorted2.json");
+
 Stopwatch timeMeasure = new Stopwatch();
 timeMeasure.Start();
-sortingMethods.BubbleSort(array, array.Length);
+sortingMethods.SortArray(array, 0, array.Length-1);
 timeMeasure.Stop();
-Console.WriteLine($"{timeMeasure.Elapsed.TotalMilliseconds} ms");
+Console.WriteLine($"Time Quick Sort: {timeMeasure.Elapsed.TotalMilliseconds} ms");
+
+
+
 
 /*
+Stopwatch timeMeasure = new Stopwatch();
+timeMeasure.Start();
+//sortingMethods.
+timeMeasure.Stop();
+Console.WriteLine($"Time sorting: {timeMeasure.Elapsed.TotalMilliseconds} ms");
+
 //Bubble 
 timeMeasure.Start();
-sortingMethods.BubbleSort(array, array.Length);
+sortingMethods.BubbleSort(array);
 timeMeasure.Stop();
 Console.WriteLine($"Time Bubble Sort: {timeMeasure.Elapsed.TotalMilliseconds} ms");
 
@@ -106,21 +115,11 @@ sortingMethods.HeapSort(array);
 timeMeasure.Stop();
 Console.WriteLine($"Time Heap Sort: {timeMeasure.Elapsed.TotalMilliseconds} ms");
 
-
 // Counting
 List<int> list = new List<int>();
-list = vectGen.ReadArrayToList("ArraySemiSorted.json");
+list = vectGen.ReadJsonToList("ArraySemiSorted.json");
 timeMeasure.Start();
 sortingMethods.CountSort(list);
 timeMeasure.Stop();
 Console.WriteLine($"Time Count Sort: {timeMeasure.Elapsed.TotalMilliseconds} ms");
-
-
-
-
- */
-
-
-
-//Console.WriteLine(File.ReadAllText(fileName));
-
+*/
