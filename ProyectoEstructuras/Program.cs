@@ -58,16 +58,16 @@ SortingMethods sortingMethods = new SortingMethods();
 //10000
 List<int> list = vectGen.GenerateSortedList(10700);
 list.Reverse();
-vectGen.ListToJson(list, "Sorted2.json");
+vectGen.ListToJson(list, "ArraySorted.json");
 
 
-int[] array = vectGen.ReadJson("Sorted2.json");
+int[] array = vectGen.ReadJson("ArraySorted.json");
 
 Stopwatch timeMeasure = new Stopwatch();
 timeMeasure.Start();
-sortingMethods.SortArray(array, 0, array.Length-1);
+sortingMethods.BubbleSort(array);
 timeMeasure.Stop();
-Console.WriteLine($"Time Quick Sort: {timeMeasure.Elapsed.TotalMilliseconds} ms");
+Console.WriteLine($"Time Bubble Sort: {timeMeasure.Elapsed.TotalMilliseconds} ms");
 
 
 
